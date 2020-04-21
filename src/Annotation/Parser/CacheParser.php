@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace BiiiiiigMonster\Cache\Annotation\Parser;
@@ -26,8 +26,8 @@ class CacheParser extends Parser
     public function parse(int $type, $annotationObject): array
     {
         // TODO: Implement parse() method.
-        if($type !== self::TYPE_METHOD) {
-            throw new AnnotationException('Annotation CacheWrap should on method!');
+        if($type === self::TYPE_PROPERTY) {
+            throw new AnnotationException('Annotation Cache should not on property!');
         }
 
         $data = [

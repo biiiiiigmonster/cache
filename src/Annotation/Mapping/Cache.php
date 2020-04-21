@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace BiiiiiigMonster\Cache\Annotation\Mapping;
@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  * Class Cache
  * @package BiiiiiigMonster\Cache\Annotation\Mapping
  * @Annotation()
- * @Target({"METHOD","CLASS"})
+ * @Target({"CLASS","METHOD"})
  * @Attributes(
  *     @Attribute("key",type="string"),
  *     @Attribute("ttl",type="int")
