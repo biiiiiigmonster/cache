@@ -38,4 +38,16 @@ class AutoLoader extends SwoftComponent
 
         return ComposerJSON::open($jsonFile)->getMetadata();
     }
+
+    /**
+     * @return array
+     */
+    public function beans(): array
+    {
+        return [
+            'cache' => [
+                'class' => Cache::class,
+            ],
+        ];
+    }
 }
