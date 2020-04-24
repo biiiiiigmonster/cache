@@ -14,6 +14,19 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 class Cache
 {
+    // Cache manager bean name
+    public const MANAGER    = 'cacheManager';
+    public const ADAPTER    = 'cacheAdapter';
+    public const SERIALIZER = 'cacheSerializer';
+
+    /**
+     * @return CacheManager
+     */
+    public static function manager(): CacheManager
+    {
+        return \Swoft::getBean(self::MANAGER);
+    }
+
     /**
      * @param string $key
      * @param string $className
