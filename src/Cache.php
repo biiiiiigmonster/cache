@@ -5,19 +5,33 @@ namespace BiiiiiigMonster\Cache;
 
 
 use Swoft\Bean\Annotation\Mapping\Bean;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
 
 /**
  * Class Cache
  * @package BiiiiiigMonster\Cache
  * @Bean()
+ *
+ * @method static bool has($key)
+ * @method static bool set($key, $value, $ttl = null)
+ * @method static get($key, $default = null)
+ * @method static delete($key)
+ * @method static bool clear()
+ * @method static array getMultiple($keys, $default = null)
+ * @method static bool setMultiple($values, $ttl = null)
+ * @method static bool deleteMultiple($keys)
+ * @method static CacheAdapterInterface getAdapter()
+ * @method static void setAdapter(CacheAdapterInterface $adapter)
+ * @method static remember($key, $ttl, \Closure $callback)
+ * @method static bool forever($key, $value)
+ * @method static pull($key, $default = null)
  */
 class Cache
 {
     // Cache manager bean name
-    public const MANAGER    = 'cacheManager';
-    public const ADAPTER    = 'cacheAdapter';
-    public const SERIALIZER = 'cacheSerializer';
+    public const MANAGER    = 'cache.manager';
+    public const ADAPTER    = 'cache.adapter';
+    public const SERIALIZER = 'cache.serializer';
 
     /**
      * @return CacheManager
@@ -28,22 +42,13 @@ class Cache
     }
 
     /**
-     * @param string $key
-     * @param string $className
      * @param string $method
-     * @param array $args
-     * @return string
+     * @param array $arguments
+     * @return mixed
      */
-    public static function evaluateKey(string $key, string $className, string $method, array $args): string
+    public static function __callStatic(string $method, array $arguments)
     {
-        if($key==='') return '';
-        // Parse express language
-        $el = new ExpressionLanguage();
-        $values = array_merge($args,[
-            'request' => context()->getRequest(),//表达式支持请求对象
-            'CLASS' => $className,
-            'METHOD' => $method,
-        ]);
-        return (string)$el->evaluate($key, $values);
+        $cacheManager = self::manager();
+        return $cacheManager->{$method}(...$arguments);
     }
 }

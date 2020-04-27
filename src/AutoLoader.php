@@ -2,6 +2,7 @@
 
 namespace BiiiiiigMonster\Cache;
 
+use BiiiiiigMonster\Cache\Adapter\RedisAdapter;
 use Swoft\Helper\ComposerJSON;
 use Swoft\Serialize\JsonSerializer;
 use Swoft\Serialize\PhpSerializer;
@@ -48,18 +49,18 @@ class AutoLoader extends SwoftComponent
     {
         return [
             Cache::MANAGER => [
-                'class'   => Cache::class,
+                'class'   => CacheManager::class,
                 'adapter' => bean(Cache::ADAPTER),
             ],
             Cache::ADAPTER => [
                 'class'      => RedisAdapter::class,
                 'redis'      => bean('redis.pool'),
-                'prefix'     => 'biiiiiigmonster:cache:',
+//                'prefix'     => 'biiiiiigmonster:cache:',
                 'serializer' => bean(Cache::SERIALIZER),
                 // 'dataFile'   => alias('@runtime/caches/cache.data'),
             ],
             Cache::SERIALIZER => [
-                'class' => JsonSerializer::class
+                'class' => PhpSerializer::class
             ]
         ];
     }

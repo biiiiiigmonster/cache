@@ -4,78 +4,50 @@
 namespace BiiiiiigMonster\Cache;
 
 
+use BiiiiiigMonster\Cache\Concern\CacheAbleTrait;
 use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
-use Psr\SimpleCache\CacheInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class CacheManager implements CacheInterface
+/**
+ * Class CacheManager
+ * @package BiiiiiigMonster\Cache
+ */
+class CacheManager
 {
+    use CacheAbleTrait;
     /**
      * @var CacheAdapterInterface
      */
-    protected $adapter;
+    protected CacheAdapterInterface $adapter;
 
     /**
-     * {@inheritDoc}
+     * @param string $method
+     * @param array $arguments
+     * @return mixed
      */
-    public function get($key, $default = null)
+    public function __call(string $method, array $arguments)
     {
-        // TODO: Implement get() method.
+        return $this->adapter->{$method}(...$arguments);
     }
 
     /**
-     * {@inheritDoc}
+     * @param string $key
+     * @param string $className
+     * @param string $method
+     * @param array $args
+     * @return string
      */
-    public function set($key, $value, $ttl = null): bool
+    public function evaluateKey(string $key, string $className, string $method, array $args): string
     {
-        // TODO: Implement set() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function delete($key): bool
-    {
-        // TODO: Implement delete() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function clear(): bool
-    {
-        // TODO: Implement clear() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getMultiple($keys, $default = null): array
-    {
-        // TODO: Implement getMultiple() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setMultiple($values, $ttl = null): bool
-    {
-        // TODO: Implement setMultiple() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function deleteMultiple($keys): bool
-    {
-        // TODO: Implement deleteMultiple() method.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function has($key): bool
-    {
-        // TODO: Implement has() method.
+        if($key==='') return '';
+        // Parse express language
+        $el = new ExpressionLanguage();
+        $values = array_merge($args,[
+            'request' => context()->getRequest(),//表达式支持请求对象
+            'CLASS' => $className,
+            'METHOD' => $method,
+        ]);
+        return (string)$el->evaluate($key, $values);
     }
 
     /**

@@ -20,19 +20,15 @@ use Doctrine\Common\Annotations\Annotation\Target;
 class Cache
 {
     /**
-     * @var string
-     */
-    private $prefix = 'biiiiiigmonster:cache:';
-    /**
      * 注解key支持symfony/expression-language语法表达式
      * @var string
      */
-    private $key = '';
+    private string $key = '';
 
     /**
      * @var int
      */
-    private $ttl = 3600;
+    private ?int $ttl = 3600;
 
     /**
      * CacheWrap constructor.

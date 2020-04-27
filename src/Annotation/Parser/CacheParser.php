@@ -31,7 +31,6 @@ class CacheParser extends Parser
         }
 
         $data = [
-            $annotationObject->getPrefix(),
             $annotationObject->getKey(),
             $annotationObject->getTtl(),
         ];

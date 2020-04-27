@@ -14,7 +14,7 @@ class CacheRegister
     /**
      * @var array
      */
-    private static $data = [];
+    private static array $data = [];
 
     /**
      * 注册
