@@ -14,17 +14,17 @@ use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
  *
  * @method static bool has($key)
  * @method static bool set($key, $value, $ttl = null)
- * @method static get($key, $default = null)
- * @method static delete($key)
+ * @method static mixed get($key, $default = null)
+ * @method static bool delete($key)
  * @method static bool clear()
  * @method static array getMultiple($keys, $default = null)
  * @method static bool setMultiple($values, $ttl = null)
  * @method static bool deleteMultiple($keys)
  * @method static CacheAdapterInterface getAdapter()
  * @method static void setAdapter(CacheAdapterInterface $adapter)
- * @method static remember($key, $ttl, \Closure $callback)
+ * @method static mixed remember($key, $ttl, \Closure $callback)
  * @method static bool forever($key, $value)
- * @method static pull($key, $default = null)
+ * @method static mixed pull($key, $default = null)
  */
 class Cache
 {
