@@ -1,17 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace BiiiiiigMonster\Cache\Concern;
 
 use DateInterval;
 use DateTime;
+use Psr\SimpleCache\CacheInterface;
 use Traversable;
 use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
 use Swoft\Cache\Exception\InvalidArgumentException;
 use Swoft\Serialize\Contract\SerializerInterface;
 use Swoft\Serialize\PhpSerializer;
 
-abstract class AbstractAdapter implements CacheAdapterInterface
+abstract class AbstractAdapter implements CacheAdapterInterface,CacheInterface
 {
     //我还不知道这两个常量有啥用
     public const TIME_KEY = 't';
@@ -90,6 +91,51 @@ abstract class AbstractAdapter implements CacheAdapterInterface
 
         $msgTpl = 'Expiration date must be an integer, a DateInterval or null, "%s" given';
         throw new InvalidArgumentException(sprintf($msgTpl, is_object($ttl) ? get_class($ttl) : gettype($ttl)));
+    }
+
+    /**
+     * 不存在则写入缓存数据后返回
+     * @param string $key
+     * @param mixed $value 缓存数据，支持闭包传参
+     * @param int $ttl 过期时间
+     * @return mixed
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function remember(string $key,$value,?int $ttl=null)
+    {
+        $cache = $this->get($key);
+        if($cache !== null) {
+            return $cache;
+        }
+
+        if($value instanceof \Closure) {
+            $value = $value();
+        }
+
+        $this->set($key,$value,$ttl);
+
+        return $value;
+    }
+
+    /**
+     * @param $key
+     * @param $value
+     * @return bool
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function forever($key, $value): bool
+    {
+        return $this->set($key, $value);
+    }
+
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
+    public function pull($key)
+    {
+        return tap($this->get($key), fn()=>$this->delete($key));
     }
 
     /**

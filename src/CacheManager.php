@@ -1,10 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace BiiiiiigMonster\Cache;
 
 
-use BiiiiiigMonster\Cache\Concern\CacheAbleTrait;
 use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -14,7 +13,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 class CacheManager
 {
-    use CacheAbleTrait;
     /**
      * @var CacheAdapterInterface
      */

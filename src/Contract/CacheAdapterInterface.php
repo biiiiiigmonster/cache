@@ -1,12 +1,9 @@
-<?php
-
+<?php declare(strict_types=1);
 
 namespace BiiiiiigMonster\Cache\Contract;
 
 
-use Psr\SimpleCache\CacheInterface;
-
-interface CacheAdapterInterface extends CacheInterface
+interface CacheAdapterInterface
 {
     /**
      * 自增缓存（针对数值缓存）
