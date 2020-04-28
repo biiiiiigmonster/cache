@@ -4,7 +4,7 @@
 namespace BiiiiiigMonster\Cache;
 
 
-use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
+use BiiiiiigMonster\Cache\Concern\AbstractAdapter;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
@@ -14,9 +14,9 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 class CacheManager
 {
     /**
-     * @var CacheAdapterInterface
+     * @var AbstractAdapter
      */
-    protected CacheAdapterInterface $adapter;
+    protected AbstractAdapter $adapter;
 
     /**
      * @param string $method
@@ -49,17 +49,17 @@ class CacheManager
     }
 
     /**
-     * @return CacheAdapterInterface
+     * @return AbstractAdapter
      */
-    public function getAdapter(): CacheAdapterInterface
+    public function getAdapter(): AbstractAdapter
     {
         return $this->adapter;
     }
 
     /**
-     * @param CacheAdapterInterface $adapter
+     * @param AbstractAdapter $adapter
      */
-    public function setAdapter(CacheAdapterInterface $adapter): void
+    public function setAdapter(AbstractAdapter $adapter): void
     {
         $this->adapter = $adapter;
     }
