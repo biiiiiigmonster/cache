@@ -6,11 +6,24 @@ namespace BiiiiiigMonster\Cache;
 
 use BiiiiiigMonster\Cache\Concern\AbstractAdapter;
 use BiiiiiigMonster\Cache\Concern\CacheAbleTrait;
+use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * Class CacheManager
  * @package BiiiiiigMonster\Cache
+ *
+ * @method bool has($key)
+ * @method bool set($key, $value, $ttl = null)
+ * @method mixed get($key, $default = null)
+ * @method bool delete($key)
+ * @method bool clear()
+ * @method array getMultiple($keys, $default = null)
+ * @method bool setMultiple($values, $ttl = null)
+ * @method bool deleteMultiple($keys)
+ * @method int inc($key, $step = 1)
+ * @method int dec($key, $step = 1)
+ * @method int ttl($key)
  */
 class CacheManager
 {

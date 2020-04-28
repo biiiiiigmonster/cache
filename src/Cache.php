@@ -25,6 +25,9 @@ use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
  * @method static mixed remember($key, $ttl, \Closure $callback)
  * @method static bool forever($key, $value)
  * @method static mixed pull($key, $default = null)
+ * @method static int inc($key, $step = 1)
+ * @method static int dec($key, $step = 1)
+ * @method static int ttl($key)
  */
 class Cache
 {
