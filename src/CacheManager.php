@@ -5,6 +5,7 @@ namespace BiiiiiigMonster\Cache;
 
 
 use BiiiiiigMonster\Cache\Concern\AbstractAdapter;
+use BiiiiiigMonster\Cache\Concern\CacheAbleTrait;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
@@ -13,6 +14,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 class CacheManager
 {
+    use CacheAbleTrait;
     /**
      * @var AbstractAdapter
      */

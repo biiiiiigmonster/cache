@@ -39,7 +39,7 @@ class RedisAdapter extends AbstractAdapter
 
         $cacheKey = $this->getCacheKey($key);
 
-        return tap($this->redis->get($cacheKey), fn($value) => is_null($value)?$default:$value);
+        return tap($this->redis->get($cacheKey), fn($value) => $value===false?$default:$value);
     }
 
     /**

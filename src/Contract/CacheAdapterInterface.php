@@ -24,7 +24,7 @@ interface CacheAdapterInterface
     public function dec(string $key, int $step = 1);
 
     /**
-     * 自减缓存（针对数值缓存）
+     * 获取缓存有效时间
      * @access public
      * @param string $key 缓存变量名
      * @return false|int

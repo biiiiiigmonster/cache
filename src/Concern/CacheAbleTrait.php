@@ -15,7 +15,7 @@ trait CacheAbleTrait
     public function remember(string $key,$value,?int $ttl=null)
     {
         $cache = $this->get($key);
-        if($cache !== null) {
+        if($cache !== false) {
             return $cache;
         }
 
