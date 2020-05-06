@@ -17,7 +17,7 @@ use Doctrine\Common\Annotations\Annotation\Target;
  *     @Attribute("ttl",type="int")
  * )
  */
-class Cache
+final class Cache
 {
     /**
      * 注解key支持symfony/expression-language语法表达式
