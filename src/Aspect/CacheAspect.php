@@ -36,7 +36,7 @@ class CacheAspect
      * @param ProceedingJoinPoint $proceedingJoinPoint
      * @return mixed
      */
-    public function aroundAdvice(ProceedingJoinPoint $proceedingJoinPoint)
+    public function around(ProceedingJoinPoint $proceedingJoinPoint)
     {
         $className = $proceedingJoinPoint->getClassName();
         $method = $proceedingJoinPoint->getMethod();
