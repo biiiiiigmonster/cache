@@ -8,7 +8,7 @@ use DateTime;
 use Psr\SimpleCache\CacheInterface;
 use Traversable;
 use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
-use Swoft\Cache\Exception\InvalidArgumentException;
+use BiiiiiigMonster\Cache\Exception\InvalidArgumentException;
 use Swoft\Serialize\Contract\SerializerInterface;
 use Swoft\Serialize\PhpSerializer;
 
