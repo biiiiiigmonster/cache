@@ -7,6 +7,7 @@ use Swoft\Helper\ComposerJSON;
 use Swoft\Serialize\JsonSerializer;
 use Swoft\Serialize\PhpSerializer;
 use Swoft\SwoftComponent;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use function dirname;
 
 /**
@@ -51,6 +52,10 @@ class AutoLoader extends SwoftComponent
             Cache::MANAGER => [
                 'class'   => CacheManager::class,
                 'adapter' => bean(Cache::ADAPTER),
+                'el' => bean('el'),
+            ],
+            'el' => [
+                'class' => ExpressionLanguage::class,
             ],
             Cache::ADAPTER => [
                 'class'      => RedisAdapter::class,

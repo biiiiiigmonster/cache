@@ -34,6 +34,11 @@ class CacheManager
     protected AbstractAdapter $adapter;
 
     /**
+     * @var ExpressionLanguage
+     */
+    protected ExpressionLanguage $el;
+
+    /**
      * @param string $method
      * @param array $arguments
      * @return mixed
@@ -53,14 +58,13 @@ class CacheManager
     public function evaluateKey(string $key, string $className, string $method, array $args): string
     {
         if($key==='') return '';
-        // Parse express language
-        $el = new ExpressionLanguage();
+
         $values = array_merge($args,[
             'request' => context()->getRequest(),//表达式支持请求对象
             'CLASS' => $className,
             'METHOD' => $method,
         ]);
-        return (string)$el->evaluate($key, $values);
+        return (string)$this->el->evaluate($key, $values);
     }
 
     /**

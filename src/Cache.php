@@ -4,13 +4,11 @@
 namespace BiiiiiigMonster\Cache;
 
 
-use Swoft\Bean\Annotation\Mapping\Bean;
 use BiiiiiigMonster\Cache\Contract\CacheAdapterInterface;
 
 /**
  * Class Cache
  * @package BiiiiiigMonster\Cache
- * @Bean()
  *
  * @method static bool has($key)
  * @method static bool set($key, $value, $ttl = null)
