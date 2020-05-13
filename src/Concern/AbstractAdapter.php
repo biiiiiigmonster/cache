@@ -115,7 +115,11 @@ abstract class AbstractAdapter implements CacheAdapterInterface,CacheInterface
      */
     public function getSerializer(): SerializerInterface
     {
-        return $this->serializer ?: new PhpSerializer();
+        if (!$this->serializer) {
+            $this->serializer = new PhpSerializer();
+        }
+
+        return $this->serializer;
     }
 
     /**
