@@ -86,7 +86,7 @@ abstract class AbstractAdapter implements CacheAdapterInterface,CacheInterface
         }
 
         if ($ttl instanceof DateInterval) {
-            return (int)DateTime::createFromFormat('U', 0)->add($ttl)->format('U');
+            return (int)DateTime::createFromFormat('U', '0')->add($ttl)->format('U');
         }
 
         $msgTpl = 'Expiration date must be an integer, a DateInterval or null, "%s" given';
