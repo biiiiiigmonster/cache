@@ -57,7 +57,7 @@ class CacheManager
      */
     public function evaluateKey(string $key, string $className, string $method, array $args): string
     {
-        if($key==='') return '';
+        if($key==='') return "$className@$method";
 
         $values = array_merge($args,[
             'request' => context()->getRequest(),//表达式支持请求对象
