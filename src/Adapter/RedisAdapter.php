@@ -50,7 +50,7 @@ class RedisAdapter extends AbstractAdapter
     /**
      * @param string $key
      * @param mixed $value
-     * @param null $ttl
+     * @param null|int|\DateInterval $ttl
      * @return bool
      */
     public function set($key, $value, $ttl = null): bool
@@ -100,7 +100,7 @@ class RedisAdapter extends AbstractAdapter
 
     /**
      * @param iterable|array $values
-     * @param null|int $ttl
+     * @param null|int|\DateInterval $ttl
      * @return bool
      */
     public function setMultiple($values, $ttl = null): bool
