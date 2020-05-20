@@ -143,9 +143,9 @@ class RedisAdapter extends AbstractAdapter
     /**
      * @param string $key
      * @param int $step
-     * @return false|int
+     * @return int
      */
-    public function inc(string $key, int $step = 1)
+    public function inc(string $key, int $step = 1) :int
     {
         $this->checkKey($key);
 
@@ -157,9 +157,9 @@ class RedisAdapter extends AbstractAdapter
     /**
      * @param string $key
      * @param int $step
-     * @return false|int
+     * @return int
      */
-    public function dec(string $key, int $step = 1)
+    public function dec(string $key, int $step = 1) :int
     {
         $this->checkKey($key);
 
@@ -170,9 +170,9 @@ class RedisAdapter extends AbstractAdapter
 
     /**
      * @param string $key
-     * @return false|int
+     * @return int
      */
-    public function ttl(string $key)
+    public function ttl(string $key) :int
     {
         $this->checkKey($key);
 
