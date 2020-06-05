@@ -77,10 +77,14 @@ abstract class AbstractAdapter implements CacheAdapterInterface,CacheInterface
 
     /**
      * @param $ttl
-     * @return int
+     * @return int|null
      */
-    protected function formatTTL($ttl): int
+    protected function formatTTL($ttl): ?int
     {
+        if (is_null($ttl)) {
+            return null;
+        }
+
         if (is_int($ttl)) {
             return max($ttl,0);
         }
